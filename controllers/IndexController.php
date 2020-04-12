@@ -14,15 +14,16 @@ class IndexController extends Controller
         $this->_setModel($model);
     }
 
-    public function products()
+    public function index()
     {
         try {
-            $this->_view->set('title', 'Products List');
+            $this->view->set('title', 'Products List');
+            $product = new ProductModel();
 
-            $products = $this->_model->getProducts();
-            $this->_view->set('products', $products);
+            $products = $product->getProducts();
+            $this->view->set('products', $products);
 
-            return $this->_view->output();
+            return $this->view->output();
 
         } catch (Exception $e) {
             echo "Application error:".$e->getMessage();

@@ -4,7 +4,7 @@ include_once 'partials/head.php';
 <link rel="stylesheet" href="includes/css/cart.css">
 
 <div class="text-right mt-4">
-    <a href="?load=Index/products" class="btn">Go to Products List</a>
+    <a href="?load=Index/index" class="btn">Go to Products List</a>
 </div>
 
 <h1 class="text-center" style="color: #13cfdf;">Cart</h1>
@@ -17,24 +17,31 @@ include_once 'partials/head.php';
         <label class="product-removal">Remove</label>
         <label class="product-line-price">Total</label>
     </div>
-
-    <div class="product">
-        <div class="product-details">
-            <div class="product-title">Nike Flex Form TR Women's Sneaker</div>
-            <p class="product-description"> It has a lightweight, breathable mesh upper with forefoot cables for a
-                locked-down fit.</p>
-        </div>
-        <div class="product-price">12.99</div>
-        <div class="product-quantity">
-            <input type="number" value="2" min="1">
-        </div>
-        <div class="product-removal">
-            <button class="remove-product">
-                Remove
-            </button>
-        </div>
-        <div class="product-line-price">25.98</div>
-    </div>
+    <?php
+    if (isset($_SESSION['shopping_cart'])) {
+        foreach ($_SESSION['shopping_cart'] as $product) {
+            ?>
+            <div class="product">
+                <div class="product-details">
+                    <div class="product-title"><?php echo $product['name'] ?></div>
+                </div>
+                <div class="product-price"><?php echo $product['price']; ?></div>
+                <div class="product-quantity">
+                    <input type="number" value="2" min="1" max="10"/>
+                </div>
+                <div class="product-removal">
+                    <button class="remove-product" data-product-id="<?php echo $product['id'] ?>">
+                        Remove
+                    </button>
+                </div>
+                <div class="product-line-price"><?php echo $product['price'] * 1; ?></div>
+            </div>
+            <?php
+        }
+    } else {
+        echo "<h3>Your cart is empty!</h3>";
+    }
+    ?>
 
     <div class="totals">
         <div class="totals-item">
@@ -55,7 +62,13 @@ include_once 'partials/head.php';
         </div>
     </div>
 
-    <button class="checkout">Checkout</button>
+    <?php
+    if (isset($_SESSION['shopping_cart'])) {
+        ?>
+        <button class="checkout">Checkout</button>
+        <?php
+    }
+    ?>
 </div>
 <script src="includes/js/cart.js"></script>
 

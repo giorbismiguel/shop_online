@@ -2,15 +2,15 @@
 
 class Controller
 {
-    protected $_model;
+    protected $model;
 
-    protected $_controller;
+    protected $controller;
 
-    protected $_action;
+    protected $action;
 
-    protected $_view;
+    protected $view;
 
-    protected $_modelBaseName;
+    protected $modelBaseName;
 
     /**
      * Controller constructor.
@@ -20,11 +20,12 @@ class Controller
      */
     public function __construct($model, $action)
     {
-        $this->_controller = ucwords(__CLASS__);
-        $this->_action = $action;
-        $this->_modelBaseName = $model;
+        session_start();
+        $this->controller = ucwords(__CLASS__);
+        $this->action = $action;
+        $this->modelBaseName = $model;
 
-        $this->_view = new View(HOME.DS.'views'.DS.$action.'.php');
+        $this->view = new View(HOME.DS.'views'.DS.$action.'.php');
     }
 
     /**
@@ -33,7 +34,7 @@ class Controller
     protected function _setModel($modelName)
     {
         $modelName .= 'Model';
-        $this->_model = new $modelName();
+        $this->model = new $modelName();
     }
 
     /**
@@ -41,6 +42,6 @@ class Controller
      */
     protected function _setView($viewName)
     {
-        $this->_view = new View(HOME.DS.'views'.DS.strtolower($this->_modelBaseName).DS.$viewName.'.php');
+        $this->view = new View(HOME.DS.'views'.DS.strtolower($this->modelBaseName).DS.$viewName.'.php');
     }
 }

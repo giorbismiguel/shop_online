@@ -1,24 +1,18 @@
-$(document).ready(function() {
-
+$(function () {
     /* Set rates + misc */
-    var taxRate = 0.05;
-    var shippingRate = 15.00;
-    var fadeTime = 300;
-
+    var taxRate = 0.05, shippingRate = 15.00, fadeTime = 300;
 
     /* Assign actions */
-    $('.product-quantity input').change( function() {
+    $('.product-quantity input').change(function () {
         updateQuantity(this);
     });
 
-    $('.product-removal button').click( function() {
+    $('.product-removal button').click(function () {
         removeItem(this);
     });
 
-
     /* Recalculate cart */
-    function recalculateCart()
-    {
+    function recalculateCart() {
         var subtotal = 0;
 
         /* Sum up row totals */
@@ -32,24 +26,22 @@ $(document).ready(function() {
         var total = subtotal + tax + shipping;
 
         /* Update totals display */
-        $('.totals-value').fadeOut(fadeTime, function() {
+        $('.totals-value').fadeOut(fadeTime, function () {
             $('#cart-subtotal').html(subtotal.toFixed(2));
             $('#cart-tax').html(tax.toFixed(2));
             $('#cart-shipping').html(shipping.toFixed(2));
             $('#cart-total').html(total.toFixed(2));
-            if(total == 0){
+            if (total == 0) {
                 $('.checkout').fadeOut(fadeTime);
-            }else{
+            } else {
                 $('.checkout').fadeIn(fadeTime);
             }
             $('.totals-value').fadeIn(fadeTime);
         });
     }
 
-
     /* Update quantity */
-    function updateQuantity(quantityInput)
-    {
+    function updateQuantity(quantityInput) {
         /* Calculate line price */
         var productRow = $(quantityInput).parent().parent();
         var price = parseFloat(productRow.children('.product-price').text());
@@ -58,7 +50,7 @@ $(document).ready(function() {
 
         /* Update line price display and recalc cart totals */
         productRow.children('.product-line-price').each(function () {
-            $(this).fadeOut(fadeTime, function() {
+            $(this).fadeOut(fadeTime, function () {
                 $(this).text(linePrice.toFixed(2));
                 recalculateCart();
                 $(this).fadeIn(fadeTime);
@@ -67,14 +59,25 @@ $(document).ready(function() {
     }
 
     /* Remove item from cart */
-    function removeItem(removeButton)
-    {
+    function removeItem(removeButton) {
         /* Remove row from DOM and recalc cart total */
         var productRow = $(removeButton).parent().parent();
-        productRow.slideUp(fadeTime, function() {
-            productRow.remove();
-            recalculateCart();
+        productRow.slideUp(fadeTime, function () {
+            $.ajax({
+                url: '/shop/?load=Cart/delete',
+                type: 'delete',
+                data: {
+                    product_id: productRow.data('product-id'),
+                },
+                success: function (res) {
+                    if (res.success) {
+                        productRow.remove();
+                        recalculateCart();
+                    }
+                },
+                error: function (res) {
+                }
+            });
         });
     }
-
 });

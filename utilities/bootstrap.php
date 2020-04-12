@@ -1,7 +1,7 @@
 <?php
 
 $controller = 'Index';
-$action = 'products';
+$action = 'index';
 $query = null;
 
 if (isset($_GET['load'])) {

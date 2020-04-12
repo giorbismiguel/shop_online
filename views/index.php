@@ -23,7 +23,7 @@ include_once 'partials/head.php';
                         <div class="price">
                             <span class="rupee-icon">$</span> <?php echo $product['price'] ?>
                         </div>
-                        <a href="#" data-id="<?php echo $product['id'] ?>" class="blue-btn">Add to cart</a>
+                        <button data-product-id="<?php echo $product['id'] ?>" class="blue-btn">Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -32,6 +32,7 @@ include_once 'partials/head.php';
         ?>
     </div>
 </div>
+<script src="includes/js/product.js"></script>
 <?php
 include_once 'partials/footer.php';
 ?>

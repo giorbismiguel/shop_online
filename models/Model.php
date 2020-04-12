@@ -5,27 +5,27 @@ class Model
     /**
      * @var PDO
      */
-    protected $_db;
+    protected $db;
 
     /**
      * @var
      */
-    protected $_sql;
+    protected $sql;
 
     /**
      * Model constructor.
      */
     public function __construct()
     {
-        $this->_db = Db::init();
+        $this->db = Db::init();
     }
 
     /**
      * @param $sql
      */
-    protected function _setSql($sql)
+    protected function setSql($sql)
     {
-        $this->_sql = $sql;
+        $this->sql = $sql;
     }
 
     /**
@@ -36,12 +36,13 @@ class Model
      */
     public function getAll($data = null)
     {
-        if (!$this->_sql) {
+        if (!$this->sql) {
             throw new Exception('No SQL query!');
         }
 
-        $sth = $this->_db->prepare($this->_sql);
+        $sth = $this->db->prepare($this->sql);
         $sth->execute($data);
+
         return $sth->fetchAll();
     }
 
@@ -53,12 +54,13 @@ class Model
      */
     public function getRow($data = null)
     {
-        if (!$this->_sql) {
-            throw new Exception("No SQL query!");
+        if (!$this->sql) {
+            throw new Exception('No SQL query!');
         }
 
-        $sth = $this->_db->prepare($this->_sql);
+        $sth = $this->db->prepare($this->sql);
         $sth->execute($data);
+
         return $sth->fetch();
     }
 }

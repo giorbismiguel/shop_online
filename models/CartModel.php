@@ -1,6 +1,6 @@
 <?php
 
-class CartModel
+class CartModel extends Model
 {
     /**
      * @return array|bool
@@ -10,7 +10,7 @@ class CartModel
     {
         $sql = 'SELECT * from products';
 
-        $this->_setSql($sql);
+        $this->setSql($sql);
         $products = $this->getAll();
 
         if (empty($products)) {
