@@ -3,18 +3,16 @@ include_once 'partials/head.php';
 ?>
 <link rel="stylesheet" href="includes/css/products.css">
 <div class="product-list">
-    <div class="row">
-        <div class="col-lg-offset-10 col-lg-2">
-            <a href="?load=Cart/cart" class="btn">Cart</a>
-        </div>
+    <div class="text-right">
+        <a href="?load=Cart/cart" class="btn">Cart</a>
     </div>
 
-    <h1 class="text-center">Product List</h1>
+    <h1 class="text-center mb-4" style="color: #13cfdf;">Products List</h1>
 
     <div class="row">
         <?php
         foreach ($products as $product) {
-        ?>
+            ?>
             <div class="col-lg-4 col-md-4 col-sm-4">
                 <div class="white-box">
                     <div class="product-img">
@@ -29,7 +27,7 @@ include_once 'partials/head.php';
                     </div>
                 </div>
             </div>
-        <?php
+            <?php
         }
         ?>
     </div>
