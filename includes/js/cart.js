@@ -43,15 +43,39 @@ $(function () {
     /* Update quantity */
     function updateQuantity(quantityInput) {
         /* Calculate line price */
-        var productRow = $(quantityInput).parent().parent();
-        var price = parseFloat(productRow.children('.product-price').text());
-        var quantity = $(quantityInput).val();
-        var linePrice = price * quantity;
+        let productRow = $(quantityInput).parent().parent(), price, quantity, linePrice;
+
+        price = parseFloat(productRow.children('.product-price').text());
+        quantity = $(quantityInput).val();
+        linePrice = price * quantity;
 
         /* Update line price display and recalc cart totals */
         productRow.children('.product-line-price').each(function () {
             $(this).fadeOut(fadeTime, function () {
                 $(this).text(linePrice.toFixed(2));
+
+                $.ajax({
+                    url: '/shop/?load=Cart/updateQuantity',
+                    type: 'post',
+                    data: {
+                        product_id: productId,
+                        qty: quantity,
+                    },
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res.success) {
+                            productRow.remove();
+                            recalculateCart();
+
+                            if (res.success) {
+                                alert(res.message);
+                            }
+                        }
+                    },
+                    error: function (res) {
+                    }
+                });
+
                 recalculateCart();
                 $(this).fadeIn(fadeTime);
             });

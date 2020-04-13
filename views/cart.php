@@ -20,7 +20,7 @@ include_once 'partials/head.php';
     <?php
     if (isset($_SESSION['shopping_cart'])) {
         foreach ($_SESSION['shopping_cart'] as $key => $product) {
-            ?>
+    ?>
             <div class="product">
                 <div class="product-details">
                     <div class="product-title"><?php echo $product['name']; ?></div>
@@ -36,10 +36,12 @@ include_once 'partials/head.php';
                 </div>
                 <div class="product-line-price"><?php echo $product['price'] * 1; ?></div>
             </div>
-            <?php
+    <?php
         }
     } else {
-        echo "<h3>Your cart is empty!</h3>";
+    ?>
+        <div class="alert alert-info text-center">Your cart is empty!</div>
+    <?php
     }
     ?>
 
