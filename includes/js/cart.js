@@ -1,6 +1,6 @@
 $(function () {
     /* Set rates + misc */
-    let shippingRate = 0, fadeTime = 300;
+    let shippingRate = 0, initBalance = 0, balance = 0, balanceAfterPaying = 0, fadeTime = 300;
 
     /* Assign actions */
     $('.product-quantity input').change(function () {
@@ -26,7 +26,7 @@ $(function () {
 
     /* Recalculate cart */
     function recalculateCart() {
-        let subtotal = 0, shipping, total;
+        let subtotal = 0, shipping, total = 0;
 
         /* Sum up row totals */
         $('.product').each(function () {
@@ -35,14 +35,21 @@ $(function () {
 
         shippingRate = parseInt($('#cart-shipping').val() === '' ? 0 : $('#cart-shipping').val());
 
+        initBalance = initBalance > 0 ? initBalance : parseFloat($('#current-balance').val());
+
+        balance = initBalance;
+
         /* Calculate totals */
-        shipping = (subtotal > 0 ? shippingRate : 0);
+        shipping = subtotal > 0 ? shippingRate : 0;
         total = subtotal + shipping;
 
         /* Update totals display */
         $('.totals-value').fadeOut(fadeTime, function () {
             $('#cart-subtotal').html(subtotal.toFixed(2));
             $('#cart-total').html(total.toFixed(2));
+
+            balanceAfterPaying = balance - total;
+            $('#balance-after-paying').html(balanceAfterPaying.toFixed(2));
 
             if (total === 0) {
                 $('.checkout').fadeOut(fadeTime);

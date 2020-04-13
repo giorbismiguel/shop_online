@@ -66,13 +66,26 @@ include_once 'partials/head.php';
             <label>Grand Total</label>
             <div class="totals-value" id="cart-total"><?php echo $sub_total + $shipping; ?></div>
         </div>
+
+        <h5 class="text-right">User Info</h5>
+        <div class="totals-item">
+            <label>Current Balance</label>
+            <div class="totals-value"><?php echo $current_balance; ?></div>
+        </div>
+        <div class="totals-item">
+            <label>Balance After Paying</label>
+            <div class="totals-value" id="balance-after-paying">
+                <?php echo $current_balance - ($sub_total + $shipping); ?>
+            </div>
+            <input type="hidden" id="current-balance" name="" value="<?php echo $current_balance; ?>">
+        </div>
     </div>
 
     <?php
     if (isset($_SESSION['shopping_cart'])) {
-    ?>
+        ?>
         <button type="button" class="checkout">Pay</button>
-    <?php
+        <?php
     }
     ?>
 </div>

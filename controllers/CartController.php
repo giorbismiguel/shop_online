@@ -20,6 +20,7 @@ class CartController extends Controller
             $this->view->set('title', 'Products List');
             $this->view->set('sub_total', 0);
             $this->view->set('shipping', 0);
+            $this->view->set('current_balance', $_SESSION['current_balance']);
 
             return $this->view->output();
 
@@ -28,9 +29,6 @@ class CartController extends Controller
         }
     }
 
-    /**
-     * @throws Exception
-     */
     public function add()
     {
         if (!isset($_POST['product_id'])) {
@@ -95,9 +93,6 @@ class CartController extends Controller
         ]);
     }
 
-    /**
-     * @throws Exception
-     */
     public function delete()
     {
         if (!empty($_SESSION['shopping_cart'])) {
