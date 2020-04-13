@@ -42,11 +42,12 @@ $(function () {
 
     /* Update quantity */
     function updateQuantity(quantityInput) {
+        let $quantityInput = $(quantityInput);
         /* Calculate line price */
-        let productRow = $(quantityInput).parent().parent(), price, quantity, linePrice;
+        let productRow = $quantityInput.parent().parent(), price, quantity, linePrice;
 
         price = parseFloat(productRow.children('.product-price').text());
-        quantity = $(quantityInput).val();
+        quantity = $quantityInput.val();
         linePrice = price * quantity;
 
         /* Update line price display and recalc cart totals */
@@ -58,7 +59,7 @@ $(function () {
                     url: '/shop/?load=Cart/updateQuantity',
                     type: 'post',
                     data: {
-                        product_id: productId,
+                        cart_id: $quantityInput.data('cart-id'),
                         qty: quantity,
                     },
                     dataType: 'json',
@@ -84,18 +85,18 @@ $(function () {
 
     /* Remove item from cart */
     function removeItem(removeButton) {
-        let $this = $(removeButton), productRow, productId;
+        let $this = $(removeButton), productRow, cartId;
 
         /* Remove row from DOM and recalc cart total */
         productRow = $this.parent().parent();
-        productId = $this.data('product-id');
+        cartId = $this.data('cart-id');
 
         productRow.slideUp(fadeTime, function () {
             $.ajax({
                 url: '/shop/?load=Cart/delete',
                 type: 'post',
                 data: {
-                    product_id: productId,
+                    cart_id: cartId,
                 },
                 dataType: 'json',
                 success: function (res) {

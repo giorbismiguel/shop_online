@@ -100,7 +100,7 @@ class CartController extends Controller
     {
         if (!empty($_SESSION['shopping_cart'])) {
             foreach ($_SESSION['shopping_cart'] as $key => $value) {
-                if ((int) $_POST['product_id'] === (int) $key) {
+                if ((int) $_POST['cart_id'] === (int) $key) {
                     unset($_SESSION['shopping_cart'][$key]);
                     $this->view->output_json([
                         'success' => true,
@@ -110,6 +110,32 @@ class CartController extends Controller
 
                 if (empty($_SESSION['shopping_cart'])) {
                     unset($_SESSION['shopping_cart']);
+                }
+            }
+        }
+    }
+
+    public function updateQuantity()
+    {
+        if (!empty($_SESSION['shopping_cart'])) {
+            foreach ($_SESSION['shopping_cart'] as $key => $value) {
+                if (isset($_POST['cart_id']) &&
+                    (int) $_POST['cart_id'] === (int) $key &&
+                    isset($_POST['qty'])
+                ) {
+                    if ($_SESSION['shopping_cart'][$key]['quantity'] ?? false) {
+                        $_SESSION['shopping_cart'][$key]['quantity'] = $_POST['qty'];
+                        $this->view->output_json([
+                            'success' => true,
+                            'message' => 'The quantity has been updated!.',
+                        ]);
+
+                        return;
+                    }
+
+                    $this->view->output_json([
+                        'success' => false,
+                    ]);
                 }
             }
         }
