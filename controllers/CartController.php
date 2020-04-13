@@ -18,6 +18,8 @@ class CartController extends Controller
     {
         try {
             $this->view->set('title', 'Products List');
+            $this->view->set('sub_total', 0);
+            $this->view->set('shipping', 0);
 
             return $this->view->output();
 
