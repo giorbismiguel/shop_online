@@ -11,7 +11,11 @@ $(function() {
             dataType: 'json',
             success: function (res) {
                 if(res.success){
-                    alert(res.message);
+                    Swal.fire({
+                        icon: 'success',
+                        text: res.message,
+                        showCloseButton: true,
+                    });
                 }
             },
             error: function (res) {

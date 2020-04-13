@@ -13,7 +13,11 @@ $(function () {
 
     $('button.checkout').click(function () {
         if ($('#cart-shipping').val() === '') {
-            alert('Please choose a shipping option');
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please choose a shipping option',
+                showCloseButton: true,
+            });
 
             return;
         }
@@ -135,7 +139,11 @@ $(function () {
                         recalculateCart();
 
                         if (res.success) {
-                            alert(res.message);
+                            Swal.fire({
+                                icon: 'success',
+                                text: res.message,
+                                showCloseButton: true,
+                            });
                         }
                     }
                 },
