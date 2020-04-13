@@ -27,14 +27,14 @@ include_once 'partials/head.php';
                 </div>
                 <div class="product-price"><?php echo $product['price']; ?></div>
                 <div class="product-quantity">
-                    <input type="number" value="2" min="1" max="10"/>
+                    <input type="number" value="<?php echo $product['quantity']; ?>" min="1"/>
                 </div>
                 <div class="product-removal">
                     <button class="remove-product" data-product-id="<?php echo $key; ?>">
                         Remove
                     </button>
                 </div>
-                <div class="product-line-price"><?php echo $product['price'] * 1; ?></div>
+                <div class="product-line-price"><?php echo $product['price'] * $product['quantity']; ?></div>
             </div>
     <?php
         }
