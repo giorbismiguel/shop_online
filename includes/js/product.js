@@ -11,8 +11,9 @@ $(function() {
             dataType: 'json',
             success: function (res) {
                 if(res.success){
+                    let icon = res.message == 'The product is already added to your cart!.' ? 'warning' : 'success';
                     Swal.fire({
-                        icon: 'success',
+                        icon: icon,
                         text: res.message,
                         showCloseButton: true,
                     });
