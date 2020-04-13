@@ -120,7 +120,7 @@ class CartController extends Controller
                     (int) $_POST['cart_id'] === (int) $key &&
                     isset($_POST['qty'])
                 ) {
-                    if ($_SESSION['shopping_cart'][$key]['quantity'] ?? false) {
+                    if (isset($_SESSION['shopping_cart'][$key]['quantity'])) {
                         $_SESSION['shopping_cart'][$key]['quantity'] = $_POST['qty'];
                         $this->view->output_json([
                             'success' => true,

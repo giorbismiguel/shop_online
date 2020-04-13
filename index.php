@@ -9,7 +9,7 @@ spl_autoload_register(function ($class) {
     if (file_exists(HOME.DS.'utilities'.DS.strtolower($class).'.php')) {
         require_once HOME.DS.'utilities'.DS.strtolower($class).'.php';
     } else {
-        if (file_exists(HOME.DS.'models'.DS.strtolower($class).'.php')) {
+        if (file_exists(HOME.DS.'models'.DS.$class.'.php')) {
             require_once HOME.DS.'models'.DS.$class.'.php';
         } else {
             if (file_exists(HOME.DS.'controllers'.DS.$class.'.php')) {
