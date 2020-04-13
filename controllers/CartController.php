@@ -137,4 +137,23 @@ class CartController extends Controller
             }
         }
     }
+
+    public function pay()
+    {
+        if (!empty($_SESSION['shopping_cart'])) {
+            $_SESSION['current_balance'] = $_SESSION['current_balance'] - $_POST['cart_total'];
+            $this->view->output_json([
+                'success' => true,
+                'message' => 'The pay has been successfully!.',
+            ]);
+
+            unset($_SESSION['shopping_cart']);
+
+            return;
+        }
+
+        $this->view->output_json([
+            'success' => false,
+        ]);
+    }
 }

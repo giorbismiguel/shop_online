@@ -35,7 +35,7 @@ include_once 'partials/head.php';
                         Remove
                     </button>
                 </div>
-                <div class="product-line-price"><?php echo $product['price'] * $product['quantity']; ?></div>
+                <div class="product-line-price"><?php echo format_money($product['price'] * $product['quantity']); ?></div>
             </div>
             <?php
             $sub_total += $product['price'] * $product['quantity'];
@@ -50,7 +50,7 @@ include_once 'partials/head.php';
     <div class="totals">
         <div class="totals-item">
             <label>Subtotal</label>
-            <div class="totals-value" id="cart-subtotal"><?php echo $sub_total; ?></div>
+            <div class="totals-value" id="cart-subtotal"><?php echo format_money($sub_total); ?></div>
         </div>
         <div class="totals-item">
             <label>Shipping</label>
@@ -64,20 +64,20 @@ include_once 'partials/head.php';
         </div>
         <div class="totals-item totals-item-total">
             <label>Grand Total</label>
-            <div class="totals-value" id="cart-total"><?php echo $sub_total + $shipping; ?></div>
+            <div class="totals-value" id="cart-total"><?php echo format_money($sub_total + $shipping); ?></div>
         </div>
 
         <h5 class="text-right">User Info</h5>
         <div class="totals-item">
             <label>Current Balance</label>
-            <div class="totals-value"><?php echo $current_balance; ?></div>
+            <div class="totals-value"><?php echo format_money($current_balance); ?></div>
         </div>
         <div class="totals-item">
             <label>Balance After Paying</label>
             <div class="totals-value" id="balance-after-paying">
-                <?php echo $current_balance - ($sub_total + $shipping); ?>
+                <?php echo format_money($current_balance - ($sub_total + $shipping)); ?>
             </div>
-            <input type="hidden" id="current-balance" name="" value="<?php echo $current_balance; ?>">
+            <input type="hidden" id="current-balance" name="" value="<?php echo format_money($current_balance); ?>">
         </div>
     </div>
 

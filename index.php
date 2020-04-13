@@ -20,4 +20,5 @@ spl_autoload_register(function ($class) {
 });
 
 require_once HOME.DS.'config.php';
+require_once HOME.DS.'helpers.php';
 require_once HOME.DS.'utilities'.DS.'bootstrap.php';

@@ -17,7 +17,7 @@ class IndexController extends Controller
     public function index()
     {
         try {
-            $_SESSION['current_balance'] = 100;
+            $_SESSION['current_balance'] = isset($_SESSION['current_balance']) ? $_SESSION['current_balance'] : 100;
 
             $this->view->set('title', 'Products List');
             $product = new ProductModel();

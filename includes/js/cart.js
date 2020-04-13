@@ -17,6 +17,21 @@ $(function () {
 
             return;
         }
+
+        $.ajax({
+            url: '/shop/?load=Cart/pay',
+            type: 'post',
+            data: {
+                cart_total: $('#cart-total').html(),
+            },
+            dataType: 'json',
+            success: function (res) {
+                if (res.success) {
+                    window.location = '?load=Index/index';
+                }
+            },
+            error: function (res) {}
+        });
     });
 
     $('#cart-shipping').change(function () {
