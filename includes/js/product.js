@@ -8,6 +8,7 @@ $(function() {
             data: {
                 product_id: $this.data('product-id'),
             },
+            dataType: 'json',
             success: function (res) {
                 if(res.success){
                     alert(res.message);

@@ -24,12 +24,12 @@ class ProductModel extends Model
     {
         $sql = 'select * from products where id = ?';
         $this->setSql($sql);
-        $articleDetails = $this->getRow([$id]);
+        $product = $this->getRow([$id]);
 
-        if (empty($articleDetails)) {
+        if (empty($product)) {
             return false;
         }
 
-        return $articleDetails;
+        return $product;
     }
 }

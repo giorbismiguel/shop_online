@@ -19,8 +19,6 @@ class CartController extends Controller
         try {
             $this->view->set('title', 'Products List');
 
-            var_dump($_SESSION['shopping_cart']);
-
             return $this->view->output();
 
         } catch (Exception $e) {
@@ -43,6 +41,15 @@ class CartController extends Controller
 
         $productModel = new ProductModel();
         $product = $productModel->getProductById($productId);
+
+        if (!$product) {
+            $this->view->output_json([
+                'success' => true,
+                'message' => 'The product don\'t exist!.',
+            ]);
+
+            return;
+        }
 
         $cartArray = [
             $product['id'] => [
@@ -86,8 +93,25 @@ class CartController extends Controller
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
     public function delete()
     {
-        
+        if (!empty($_SESSION['shopping_cart'])) {
+            foreach ($_SESSION['shopping_cart'] as $key => $value) {
+                if ((int) $_POST['product_id'] === (int) $key) {
+                    unset($_SESSION['shopping_cart'][$key]);
+                    $this->view->output_json([
+                        'success' => true,
+                        'message' => 'Product is removed from your cart!.',
+                    ]);
+                }
+
+                if (empty($_SESSION['shopping_cart'])) {
+                    unset($_SESSION['shopping_cart']);
+                }
+            }
+        }
     }
 }

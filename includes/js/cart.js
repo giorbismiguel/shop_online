@@ -60,19 +60,28 @@ $(function () {
 
     /* Remove item from cart */
     function removeItem(removeButton) {
+        let $this = $(removeButton), productRow, productId;
+
         /* Remove row from DOM and recalc cart total */
-        var productRow = $(removeButton).parent().parent();
+        productRow = $this.parent().parent();
+        productId = $this.data('product-id');
+
         productRow.slideUp(fadeTime, function () {
             $.ajax({
                 url: '/shop/?load=Cart/delete',
-                type: 'delete',
+                type: 'post',
                 data: {
-                    product_id: productRow.data('product-id'),
+                    product_id: productId,
                 },
+                dataType: 'json',
                 success: function (res) {
                     if (res.success) {
                         productRow.remove();
                         recalculateCart();
+
+                        if (res.success) {
+                            alert(res.message);
+                        }
                     }
                 },
                 error: function (res) {

@@ -73,7 +73,5 @@ class View
         }
 
         echo json_encode($output);
-
-        return;
     }
 }

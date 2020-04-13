@@ -19,18 +19,18 @@ include_once 'partials/head.php';
     </div>
     <?php
     if (isset($_SESSION['shopping_cart'])) {
-        foreach ($_SESSION['shopping_cart'] as $product) {
+        foreach ($_SESSION['shopping_cart'] as $key => $product) {
             ?>
             <div class="product">
                 <div class="product-details">
-                    <div class="product-title"><?php echo $product['name'] ?></div>
+                    <div class="product-title"><?php echo $product['name']; ?></div>
                 </div>
                 <div class="product-price"><?php echo $product['price']; ?></div>
                 <div class="product-quantity">
                     <input type="number" value="2" min="1" max="10"/>
                 </div>
                 <div class="product-removal">
-                    <button class="remove-product" data-product-id="<?php echo $product['id'] ?>">
+                    <button class="remove-product" data-product-id="<?php echo $key; ?>">
                         Remove
                     </button>
                 </div>
