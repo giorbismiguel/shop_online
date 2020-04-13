@@ -54,7 +54,13 @@ include_once 'partials/head.php';
         </div>
         <div class="totals-item">
             <label>Shipping</label>
-            <div class="totals-value" id="cart-shipping"><?php echo $shipping; ?></div>
+            <div class="totals-value">
+                <select name="cart-shipping" id="cart-shipping">
+                    <option value="">choose a option</option>
+                    <option value="0">pick up</option>
+                    <option value="5">UPS</option>
+                </select>
+            </div>
         </div>
         <div class="totals-item totals-item-total">
             <label>Grand Total</label>
@@ -64,9 +70,9 @@ include_once 'partials/head.php';
 
     <?php
     if (isset($_SESSION['shopping_cart'])) {
-        ?>
-        <button class="checkout">Checkout</button>
-        <?php
+    ?>
+        <button type="button" class="checkout">Pay</button>
+    <?php
     }
     ?>
 </div>

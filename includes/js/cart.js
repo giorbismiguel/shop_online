@@ -11,6 +11,19 @@ $(function () {
         removeItem(this);
     });
 
+    $('button.checkout').click(function () {
+        if ($('#cart-shipping').val() === '') {
+            alert('Please choose a shipping option');
+
+            return;
+        }
+    });
+
+    $('#cart-shipping').change(function () {
+        recalculateCart();
+        $(this).fadeIn(fadeTime);
+    });
+
     /* Recalculate cart */
     function recalculateCart() {
         let subtotal = 0, shipping, total;
@@ -20,6 +33,8 @@ $(function () {
             subtotal += parseFloat($(this).children('.product-line-price').text());
         });
 
+        shippingRate = parseInt($('#cart-shipping').val() === '' ? 0 : $('#cart-shipping').val());
+
         /* Calculate totals */
         shipping = (subtotal > 0 ? shippingRate : 0);
         total = subtotal + shipping;
@@ -27,7 +42,6 @@ $(function () {
         /* Update totals display */
         $('.totals-value').fadeOut(fadeTime, function () {
             $('#cart-subtotal').html(subtotal.toFixed(2));
-            $('#cart-shipping').html(shipping.toFixed(2));
             $('#cart-total').html(total.toFixed(2));
 
             if (total === 0) {
