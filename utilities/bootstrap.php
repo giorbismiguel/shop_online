@@ -22,10 +22,16 @@ if (isset($_GET['load'])) {
 $modelName = $controller;
 $controller .= 'Controller';
 
-$load = new $controller($modelName, $action);
+if (class_exists($controller)) {
+    $load = new $controller($modelName, $action);
 
-if (method_exists($load, $action)) {
-    $load->$action($query);
-} else {
-    die('Invalid method. Please check the URL.');
+    if (method_exists($load, $action)) {
+        $load->$action($query);
+
+        return;
+    }
+
+    die('The URL is incorrect, please change and try again.');
 }
+
+die('The URL is incorrect, please change and try again.');
