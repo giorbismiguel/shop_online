@@ -16,7 +16,7 @@ include_once 'partials/head.php';
             <div class="col-lg-6 col-md-6 mt-2">
                 <div class="white-box">
                     <div class="product-img">
-                        <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg">
+                        <img src="includes/images/<?php echo $product['image'] ?>">
                     </div>
                     <div class="product-bottom">
                         <div class="product-name"><?php echo $product['name'] ?></div>
