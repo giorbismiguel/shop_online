@@ -77,14 +77,14 @@ include_once 'partials/head.php';
             <div class="totals-value" id="balance-after-paying">
                 <?php echo format_money($current_balance - ($sub_total + $shipping)); ?>
             </div>
-            <input type="hidden" id="current-balance" name="" value="<?php echo format_money($current_balance); ?>">
+            <input type="hidden" id="current-balance" value="<?php echo format_money($current_balance); ?>">
         </div>
     </div>
 
     <?php
-    if (isset($_SESSION['shopping_cart'])) {
+    if (isset($_SESSION['shopping_cart']) && $current_balance > 0) {
         ?>
-        <button type="button" class="checkout">Pay</button>
+        <button type="button" class="checkout" id="btn-pay">Pay</button>
         <?php
     }
     ?>

@@ -63,12 +63,25 @@ $(function () {
         shipping = subtotal > 0 ? shippingRate : 0;
         total = subtotal + shipping;
 
+        balanceAfterPaying = balance - total;
+        if (balanceAfterPaying < 0) {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Your balance not allow to pay that quantity of product.',
+                showCloseButton: true,
+            });
+
+            $('#btn-pay').hide();
+            return;
+        }
+
+        $('#btn-pay').show();
+
         /* Update totals display */
         $('.totals-value').fadeOut(fadeTime, function () {
             $('#cart-subtotal').html(subtotal.toFixed(2));
             $('#cart-total').html(total.toFixed(2));
 
-            balanceAfterPaying = balance - total;
             $('#balance-after-paying').html(balanceAfterPaying.toFixed(2));
 
             if (total === 0) {
