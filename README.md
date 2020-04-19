@@ -1,4 +1,4 @@
-### Simple Shop Online
+### Simple Shop
 
 There are 4 products in an online shop, an apple is 0.3$, a beer is 2$, water is 1$ each bottle and cheese is 3.74$ each kg. They have been stored in Mysql DB
 
@@ -25,4 +25,6 @@ OOP requirements
 - Minimum (or zero) amount of static methods;
 - Encapsulation;
 - Existence of entities / models like ShoppingCart;
+
+Host: 
 
