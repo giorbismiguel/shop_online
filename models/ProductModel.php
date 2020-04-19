@@ -8,7 +8,8 @@ class ProductModel extends Model
      */
     public function getProducts()
     {
-        $sql = 'select * from products';
+        $sql = 'select p.id, p.name, p.price, p.image, ceil(avg(r.score)) as average_score from products as p';
+        $sql .= ' left join ratings as r on p.id = r.product_id group by p.id';
 
         $this->setSql($sql);
         $products = $this->getAll();

@@ -101,7 +101,6 @@
 .rating-stars ul {
     list-style-type: none;
     padding: 0;
-
     -moz-user-select: none;
     -webkit-user-select: none;
 }

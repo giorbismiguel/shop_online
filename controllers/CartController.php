@@ -14,6 +14,9 @@ class CartController extends Controller
         $this->_setModel($model);
     }
 
+    /**
+     * Show cart
+     */
     public function cart()
     {
         try {
@@ -29,19 +32,34 @@ class CartController extends Controller
         }
     }
 
+    /**
+     * Add product to the to the cart
+     *
+     * @throws Exception
+     */
     public function add()
     {
         if (!isset($_POST['product_id'])) {
             $this->view->output_json([
                 'success' => false,
+                'message' => 'An error has occurred, try again',
             ]);
+
+            return;
         }
 
         $productId = (int) $_POST['product_id'];
+        if ($productId <= 0) {
+            $this->view->output_json([
+                'success' => false,
+                'message' => 'An error has occurred, try again',
+            ]);
+
+            return;
+        }
 
         $productModel = new ProductModel();
         $product = $productModel->getProductById($productId);
-
         if (!$product) {
             $this->view->output_json([
                 'success' => true,
@@ -93,6 +111,12 @@ class CartController extends Controller
         ]);
     }
 
+
+    /**
+     * Delete product from cart
+     *
+     * @throws Exception
+     */
     public function delete()
     {
         if (!empty($_SESSION['shopping_cart'])) {
@@ -112,6 +136,11 @@ class CartController extends Controller
         }
     }
 
+    /**
+     * Update quantity for a one product in the cart
+     *
+     * @throws Exception
+     */
     public function updateQuantity()
     {
         if (!empty($_SESSION['shopping_cart'])) {
@@ -149,6 +178,12 @@ class CartController extends Controller
         }
     }
 
+
+    /**
+     * Pay and clear the shopping cart
+     *
+     * @throws Exception
+     */
     public function pay()
     {
         if (!empty($_SESSION['shopping_cart'])) {
