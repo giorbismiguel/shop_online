@@ -57,7 +57,6 @@ class CartController extends Controller
                 'name'     => $product['name'],
                 'price'    => $product['price'],
                 'quantity' => 1,
-                'weight'   => $product['weight'],
             ]
         ];
 
@@ -115,11 +114,20 @@ class CartController extends Controller
     public function updateQuantity()
     {
         if (!empty($_SESSION['shopping_cart'])) {
-            foreach ($_SESSION['shopping_cart'] as $key => $value) {
+            $position = 1;
+
+            foreach ($_SESSION['shopping_cart'] as $key => $product) {
                 if (isset($_POST['cart_id']) &&
                     (int) $_POST['cart_id'] === (int) $key &&
                     isset($_POST['qty'])
                 ) {
+                    if ((int) $_POST['qty'] <= 0) {
+                        $this->view->output_json([
+                            'success' => true,
+                            'message' => "The product {$product['name']} in the position: $position can not negative.",
+                        ]);
+                    }
+
                     if (isset($_SESSION['shopping_cart'][$key]['quantity'])) {
                         $_SESSION['shopping_cart'][$key]['quantity'] = $_POST['qty'];
                         $this->view->output_json([
@@ -134,6 +142,8 @@ class CartController extends Controller
                         'success' => false,
                     ]);
                 }
+
+                $position++;
             }
         }
     }

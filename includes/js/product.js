@@ -1,5 +1,5 @@
-$(function() {
-    $('.blue-btn').click(function(){
+$(function () {
+    $('.blue-btn').click(function () {
         let $this = $(this);
 
         $.ajax({
@@ -10,7 +10,7 @@ $(function() {
             },
             dataType: 'json',
             success: function (res) {
-                if(res.success){
+                if (res.success) {
                     let icon = res.message == 'The product is already added to your cart!.' ? 'warning' : 'success';
                     Swal.fire({
                         icon: icon,

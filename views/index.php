@@ -13,7 +13,7 @@ include_once 'partials/head.php';
         <?php
         foreach ($products as $product) {
             ?>
-            <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="col-lg-6 col-md-6">
                 <div class="white-box">
                     <div class="product-bottom">
                         <div class="product-name"><?php echo $product['name'] ?></div>

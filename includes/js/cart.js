@@ -34,7 +34,8 @@ $(function () {
                     window.location = '?load=Index/index';
                 }
             },
-            error: function (res) {}
+            error: function (res) {
+            }
         });
     });
 
@@ -87,6 +88,18 @@ $(function () {
 
         price = parseFloat(productRow.children('.product-price').text());
         quantity = $quantityInput.val();
+        if (parseInt(quantity) <= 0) {
+            Swal.fire({
+                icon: 'warning',
+                text: 'The quantity can not be negative.',
+                showCloseButton: true,
+            });
+
+            $quantityInput.val(1);
+
+            return;
+        }
+
         linePrice = price * quantity;
 
         /* Update line price display and recalc cart totals */
