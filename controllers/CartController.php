@@ -37,7 +37,7 @@ class CartController extends Controller
             ]);
         }
 
-        $productId = $_POST['product_id'];
+        $productId = (int) $_POST['product_id'];
 
         $productModel = new ProductModel();
         $product = $productModel->getProductById($productId);
@@ -51,9 +51,10 @@ class CartController extends Controller
             return;
         }
 
+        $key = $productId.'_'.strtolower($product['name']);
         $cartArray = [
-            $product['id'] => [
-                'id'       => $product['id'],
+            $key => [
+                'id'       => $productId,
                 'name'     => $product['name'],
                 'price'    => $product['price'],
                 'quantity' => 1,
@@ -72,7 +73,7 @@ class CartController extends Controller
         }
 
         $arrayKeys = array_keys($_SESSION['shopping_cart']);
-        if (in_array($_POST['product_id'], $arrayKeys)) {
+        if (in_array($key, $arrayKeys)) {
             $this->view->output_json([
                 'success' => true,
                 'message' => 'The product is already added to your cart!.',
@@ -95,7 +96,7 @@ class CartController extends Controller
     public function delete()
     {
         if (!empty($_SESSION['shopping_cart'])) {
-            foreach ($_SESSION['shopping_cart'] as $key => $value) {
+            foreach ($_SESSION['shopping_cart'] as $key => $product) {
                 if ((int) $_POST['cart_id'] === (int) $key) {
                     unset($_SESSION['shopping_cart'][$key]);
                     $this->view->output_json([
