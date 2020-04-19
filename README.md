@@ -1,8 +1,8 @@
 ### Simple Shop Online
 
-So let's say there are 4 products in an online shop, an apple is 0.3$, a beer is 2$, water is 1$ each bottle and cheese is 3.74$ each kg. They have been stored in Mysql DB
+There are 4 products in an online shop, an apple is 0.3$, a beer is 2$, water is 1$ each bottle and cheese is 3.74$ each kg. They have been stored in Mysql DB
 
-Create a simple interface where:
+Simple interface where:
 - I can add/remove products to my virtual shopping cart in any quantities
 - I can see my current cart status
 - I have to choose a shipping option between 'pick up' (USD 0) and 'UPS' (USD 5). No option is chosen by default, so if I don't choose one and click on “Pay”, the interface asks me to select one. 
