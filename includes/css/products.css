@@ -97,3 +97,28 @@
     text-decoration: line-through;
     margin-left: 4px;
 }
+
+.rating-stars ul {
+    list-style-type: none;
+    padding: 0;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.rating-stars ul > li.star {
+    display: inline-block;
+}
+
+.rating-stars ul > li.star > i.fa {
+    font-size: 1.5em;
+    color: #ccc;
+}
+
+.rating-stars ul > li.star.hover > i.fa {
+    color: #FFCC36;
+}
+
+.rating-stars ul > li.star.selected > i.fa {
+    color: #FF912C;
+}
