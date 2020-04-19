@@ -19,7 +19,7 @@ General requirements
 - Clear logic flow (avoiding spaghetti code), short methods;
 - Minimal reliance on global state: e.g. usage of superglobals. A separate place processing them should be dedicated.
 
-OOP requirements
+** OOP requirements
 - Logic should be fully inside classes including ajax controller (except, maybe, Views);
 - Separation of concerns: one class is responsible for a single thing;
 - Minimum (or zero) amount of static methods;
