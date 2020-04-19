@@ -44,7 +44,7 @@ include_once 'partials/head.php';
                         <div class="price">
                             <span class="rupee-icon">$</span> <?php echo $product['price'] ?>
                         </div>
-                        <button data-product-id="<?php echo $product['average_score'] ?>" class="blue-btn">Add to Cart</button>
+                        <button data-product-id="<?php echo $product['id'] ?>" class="blue-btn">Add to Cart</button>
                     </div>
 
                     <div class="product-bottom">
